@@ -86,4 +86,13 @@ public class ChatWindow {
 		textField.requestFocus();
 
 	}
+	
+	private class ChatClientThread extends Thread {
+
+		@Override
+		public void run() {
+			textArea.append("");
+		}
+
+	}
 }
