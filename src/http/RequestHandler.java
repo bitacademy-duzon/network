@@ -51,16 +51,11 @@ public class RequestHandler extends Thread {
 			String[] tokens = request.split(" ");
 			
 			if("GET".equals(tokens[0])) {
+				consoleLog("request:" + request);
 				responseStaticResource(outputStream, tokens[1], tokens[2]);
 			} else { //POST, DELETE, PUT, ETC 명령
-				//consoleLog("bad request:" + request);
+				consoleLog("bad request:" + request);
 				//response400Error(outputStream, token[2]);
-				/*
-				   HTTP/1.0 400 Bad Request\r\n
-				   Content-Type:text/html; charset=utf-8\r\n
-				   \r\n
-				   
-				 */
 			}
 			
 			// 예제 응답입니다.
@@ -111,7 +106,7 @@ public class RequestHandler extends Thread {
 		String contentType = Files.probeContentType(file.toPath());
 
 		// 응답
-		outputStream.write( "HTTP/1.1 200 OK\r\n".getBytes( "UTF-8" ) );
+		outputStream.write( (protocol + " 200 OK\r\n").getBytes( "UTF-8" ) );
 		outputStream.write( ("Content-Type:" + contentType + "; charset=utf-8\r\n").getBytes( "UTF-8" ) );
 		outputStream.write( "\r\n".getBytes() );
 		outputStream.write(body);
