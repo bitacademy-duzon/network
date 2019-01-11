@@ -26,11 +26,11 @@ public class ChatClientThread extends Thread {
 				System.out.println( message );
 			}
 		} catch( SocketException ex ){
-			//ChatClient.consoleLog( "다음 이유로 프로그램을 종료 합니다 :" + ex );	
-			System.exit( 0 );
+			ChatClient.consoleLog( "" + ex );	
 		} catch( IOException ex ){
 			ChatClient.consoleLog( "다음 이유로 프로그램을 종료 합니다 :" + ex );	
-			System.exit( 0 );
+		} finally {
+			System.exit(0);
 		}
 	}
 }
