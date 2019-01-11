@@ -38,6 +38,13 @@ public class UDPEchoClient {
 					new InetSocketAddress(SERVER_IP, UDPEchoServer.PORT)
 				);
 				socket.send(sendPacket);
+				
+				//5. 메세지 수신
+				DatagramPacket receivePacket = new DatagramPacket(new byte[UDPEchoServer.BUFFER_SIZE], UDPEchoServer.BUFFER_SIZE );
+				socket.receive(receivePacket);
+				
+				message = new String(receivePacket.getData(), 0, receivePacket.getLength(), "UTF-8");
+				System.out.println("<<" + message);
 			}
 		} catch(IOException e) {
 			e.printStackTrace();
